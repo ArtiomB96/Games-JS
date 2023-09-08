@@ -6,7 +6,74 @@
 </head>
 
 <body>
-<script src="wordsGame.js"> </script>
+    <h1 id="main-heading">Привет Мир!</h1>
+<!-- <script src="wordsGame.js"> </script> -->
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+// const friends = ["Кришна", "Шива", "Будда"];
+// friends.forEach(friend => {
+//     $("body").append("<p>" + friend + " " + "лучший" + "</p>");
+// });
+// const newHeadingText = ("Ом Намах Шивайя");
+// $("#main-heading").text(newHeadingText);
+// $("p").fadeOut(2000).fadeIn(2000);
+// $("html").click(function (event) {
+//     $("#main-heading").offset({
+//         left: event.pageX,
+//         top: event.pageY
+//  });
+//  });
+
+let leftOffset = 0;
+let topOffset = 0;
+let dir = "right";
+
+let moveHeading = function () {$("#main-heading").offset({ left: leftOffset, top: topOffset})
+if(dir == "right")    
+leftOffset++;
+else
+leftOffset--;
+if(leftOffset < 0 && topOffset > 0)
+{
+ leftOffset = 0;
+ topOffset--;
+}
+else if(topOffset == 0)
+{
+ dir = "right";
+}
+if (leftOffset > 200) {
+leftOffset = 200;
+
+topOffset++;
+if (topOffset > 200) {
+ topOffset =200;
+ dir = "left";
+ }
+ else if(topOffset < 0)
+ {
+ topOffset =0;
+ }
+ } 
+ };
+ 
+
+ let counter = 0;
+ let intervalTime = 50;
+ let intervalId = setInterval(moveHeading, 30);
+ $("#main-heading").click(function () {
+      clearInterval(intervalId);
+      intervalTime = intervalTime / 2;
+      counter++;
+
+      if (counter >= 10) {
+        $("#main-heading").text("Харе Кришна!");
+      } else {
+        intervalId = setInterval(moveHeading, intervalTime);
+      }
+    });
+    </script>
 </body>
+
 
 </html>
